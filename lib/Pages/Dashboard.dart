@@ -8,24 +8,41 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: AppBar(
+      //   elevation: 0,
+      //   backgroundColor: Colors.transparent,
+      //   leading: Padding(
+      //     padding: const EdgeInsets.all(8.0),
+      //     child: GestureDetector(
+      //       onTap: () {
+      //         ScaffoldMessenger.of(context).showSnackBar(
+      //           const SnackBar(content: Text('Hamburger menu clicked')),
+      //         );
+      //       },
+      //       child: Image.asset(
+      //         'assets/icons/humberger.png',
+      //         fit: BoxFit.contain,
+      //       ),
+      //     )
+      //   ),
+      // ),
+
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: GestureDetector(
-            onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Hamburger menu clicked')),
-              );
-            },
-            child: Image.asset(
-              'assets/icons/log-login.png',
-              fit: BoxFit.contain,
-            ),
-          )
-        ),
-      ),
+              backgroundColor: Colors.transparent,  // ทำให้หัวโปร่งใส
+              elevation: 0,                         // ไม่ให้เงา
+              leading: IconButton(                  // นี่คือปุ่ม Back
+                icon: const Icon(Icons.arrow_back, color: Color.fromARGB(255, 5, 230, 50)),
+                onPressed: () {
+                  Navigator.pop(context);          // กลับไปหน้าเดิม
+                },
+              ),
+            // child: Image.asset(  
+            //   'assets/icons/humberger.png',
+            //   fit: BoxFit.contain,
+            // ),
+          ),
+
+      
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
