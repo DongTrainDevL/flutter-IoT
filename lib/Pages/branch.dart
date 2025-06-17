@@ -97,8 +97,16 @@ class _BranchPageState extends State<BranchPage> {
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
+                              style:ElevatedButton.styleFrom( 
+                                backgroundColor:Color(0xFFFFFFFF) ,
+                                side: BorderSide( 
+                                  color: Color(0xFF297858) ,
+                                  width: 1 ,
+                                ),
+                              ),
                               onPressed: _addBranch,
-                              child: const Text('Add'),
+                              child: const Text('เพิ่มข้อมูล'),
+
                             ),
                           ),
                         ],
@@ -126,10 +134,11 @@ class _BranchPageState extends State<BranchPage> {
             const SizedBox(height: 20),
 
             // Table Header
+            // assing color Table header            
             Container(
               padding: const EdgeInsets.symmetric(vertical: 8),
               decoration: BoxDecoration(
-                color: Colors.grey[300],
+                color: Color(0xFF76BD9C),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Row(
@@ -151,11 +160,24 @@ class _BranchPageState extends State<BranchPage> {
                       itemCount: _branches.length,
                       itemBuilder: (context, index) {
                         final branch = _branches[index];
-                        return Card(
+                        return Container ( 
+                          decoration: BoxDecoration(  
+                            color:Color(0x000000) ,
+                            border:Border.all( 
+                            width: 2,
+                          ),
+                          
+                        ),
+                          child : Card(
+                          color:Color(0xFFFFFFFF),
+                          
+                          
                           elevation: 2,
                           margin: const EdgeInsets.symmetric(vertical: 6),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(2),
+                          
+                            
                           ),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
@@ -184,8 +206,11 @@ class _BranchPageState extends State<BranchPage> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       IconButton(
-                                        icon: const Icon(Icons.edit,
-                                            color: Colors.blue),
+                                        icon: Image.asset( 
+                                          'assets/icons/Exporlert.png', 
+                                          width: 30 ,
+                                          height: 30,
+                                        ),
                                         onPressed: () =>
                                             _editBranch(branch),
                                       ),
@@ -201,7 +226,11 @@ class _BranchPageState extends State<BranchPage> {
                               ],
                             ),
                           ),
-                        );
+                        ),
+                        ); 
+                        
+                        
+                        
                       },
                     ),
             ),

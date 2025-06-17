@@ -76,7 +76,7 @@ class _MainLayoutPageState extends State<MainLayoutPage> {
     padding: EdgeInsets.zero,
     children: [
       DrawerHeader(
-        decoration: BoxDecoration(color: Colors.indigo[900]),
+        decoration: BoxDecoration(color: Color(0xFF225D47)),
         child: Row (
         crossAxisAlignment: CrossAxisAlignment.center,
         // children5
