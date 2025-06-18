@@ -210,7 +210,7 @@ class _RegisterState extends State<Register> {
                   width: 300, 
                   height: 64,
                 child : ElevatedButton(onPressed: () { 
-                style : ElevatedButton.styleFrom( 
+                ElevatedButton.styleFrom( 
                   backgroundColor: Color(0xFFFFFFFF) ,
                   minimumSize: const Size.fromHeight(50) ,
                   shape:RoundedRectangleBorder( 

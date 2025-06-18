@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Pages/UI/Dashoard.dart';
 import 'package:flutter_application_1/Pages/UI/LoginFirstPage.dart';
 
 
@@ -121,7 +122,11 @@ class LoginView extends StatelessWidget {
                   height: 55,
 
                   child : ElevatedButton(
-                  onPressed: onLogin ,
+                  onPressed:  (){ 
+                    Navigator.pushReplacement(context, 
+                      MaterialPageRoute(builder: (context) => const MyDashboard() )
+                    );
+                  } ,
                  
                  style:ElevatedButton.styleFrom( 
                   backgroundColor: Color(0xFFFFFFFF),
