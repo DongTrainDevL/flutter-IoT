@@ -6,15 +6,19 @@ class AccountList extends StatefulWidget {
   const AccountList({super.key});
 
   @override
-  State<AccountList> createState() => accountlistapi();
+  State<AccountList> createState() => _AccountListApi();
 }
 
-class accountlistapi extends State<AccountList> {
+class _AccountListApi extends State<AccountList> {
   List<dynamic> _accountList = [];
   bool _isLoading = true;
   String? _error = '';
 
-  //create fetch api
+  @override
+  void initState() {
+    super.initState();
+    _fetchAccount();
+  }
 
   Future<void> _fetchAccount() async {
     try {
@@ -22,21 +26,31 @@ class accountlistapi extends State<AccountList> {
         Uri.parse('http://49.0.69.152/iotsf/api-flutter/register-getall.php'),
       );
 
+      print('Raw response body: ${response.body}'); // Debug
+
       if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        setState(() {
-          _accountList = data;
-          _isLoading = false;
-        });
+        try {
+          final data = json.decode(response.body);
+          setState(() {
+            _accountList = data;
+            _isLoading = false;
+          });
+          print('Parsed data: $data');
+        } catch (e) {
+          setState(() {
+            _error = 'JSON Format Error:\n$e\n\nRaw: ${response.body}';
+            _isLoading = false;
+          });
+        }
       } else {
         setState(() {
-          _error = "not found reqeust ${response.statusCode}";
+          _error = 'Request failed: ${response.statusCode}';
           _isLoading = false;
         });
       }
     } catch (err) {
       setState(() {
-        _error = "Error cathing request ${err}";
+        _error = ' Error catch: $err';
         _isLoading = false;
       });
     }
@@ -44,27 +58,19 @@ class accountlistapi extends State<AccountList> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
-      appBar: AppBar(title: const Text("member account list ")),
+      appBar: AppBar(title: const Text("Member Account List")),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
-          : _error != null
-          ? Center(child: Text(_error!))
+          : _error != null && _error!.isNotEmpty
+          ? Center(child: Text(_error!, textAlign: TextAlign.center))
           : ListView.builder(
               itemCount: _accountList.length,
               itemBuilder: (context, index) {
-                final acountlist = _accountList[index];
+                final account = _accountList[index];
                 return ListTile(
-                  title: Text(acountlist['user_account'] ?? 'Unknown'),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('username: ${acountlist['username'] ?? '-'}'),
-                      Text('name: ${acountlist['name']}'),
-                      Text('email: ${acountlist['email'] ?? '-'}'),
-                    ],
-                  ),
+                  title: Text(account['username'] ?? 'Unknown'),
+                  subtitle: Text('username: ${account['username']}'),
                   isThreeLine: true,
                 );
               },

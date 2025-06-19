@@ -23,9 +23,7 @@ class _DeviceScreenState extends State<DeviceScreen> {
   Future<void> _fetchDevices() async {
     try {
       final response = await http.get(
-        Uri.parse(
-          'http://49.0.69.152:9000/iotsf/api-flutter/device-getall.php',
-        ),
+        Uri.parse('http://49.0.69.152/iotsf/api-flutter/device-getall.php'),
       );
 
       if (response.statusCode == 200) {
@@ -58,7 +56,7 @@ class _DeviceScreenState extends State<DeviceScreen> {
           ? Center(child: Text(_error!))
           : ListView.builder(
               itemCount: _devices.length,
-              itemBuilder: (context, index) { 
+              itemBuilder: (context, index) {
                 final device = _devices[index];
                 return ListTile(
                   title: Text(device['item_name'] ?? 'Unknown'),

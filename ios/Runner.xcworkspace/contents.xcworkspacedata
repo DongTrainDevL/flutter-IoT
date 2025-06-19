@@ -4,4 +4,8 @@
    <FileRef
       location = "group:Runner.xcodeproj">
    </FileRef>
+   <FileSystemSynchronizedGroup
+      location = "group:swift-test"
+      name = "swift-test">
+   </FileSystemSynchronizedGroup>
 </Workspace>
